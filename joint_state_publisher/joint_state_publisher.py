@@ -493,9 +493,8 @@ def main(input_args=None):
     with open(parsed_args.urdf_file, 'r') as infp:
         urdf = infp.read()
 
-    node = rclpy.create_node('joint_state_publisher')
+    node = rclpy.create_node('joint_state_publisher', allow_undeclared_parameters=True, automatically_declare_parameters_from_overrides=True)
     jsp = JointStatePublisher(node, urdf)
-
     if jsp.gui is None:
         jsp.loop()
     else:
